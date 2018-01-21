@@ -33,7 +33,7 @@ video.addEventListener('canplay', function (e) {
     }
 }, false);
 
-function setWidthAndHeight(){
+function setWidthAndHeight() {
     height = video.videoHeight / (video.videoWidth / width);
 
     video.setAttribute('width', width);
@@ -42,44 +42,44 @@ function setWidthAndHeight(){
     canvas.setAttribute('height', height);
 }
 
-photoButton.addEventListener('click',function(e){
+photoButton.addEventListener('click', function (e) {
 
     // Create canvas
     const context = canvas.getContext('2d');
-    if(width && height) {
-      // set canvas props
-      canvas.width = width;
-      canvas.height = height;
-      // Draw an image of the video on the canvas
-      context.drawImage(video, 0, 0, width, height);
+    if (width && height) {
+        // set canvas props
+        canvas.width = width;
+        canvas.height = height;
+        // Draw an image of the video on the canvas
+        context.drawImage(video, 0, 0, width, height);
 
-      // Create image from the canvas
-      const imgUrl = canvas.toDataURL('image/png');
+        // Create image from the canvas
+        const imgUrl = canvas.toDataURL('image/png');
 
-      // Create img element
-      const img = document.createElement('img');
+        // Create img element
+        const img = document.createElement('img');
 
-      // Set img src
-      img.setAttribute('src', imgUrl);
+        // Set img src
+        img.setAttribute('src', imgUrl);
 
-      // Set image filter
-      img.style.filter = filter;
+        // Set image filter
+        img.style.filter = filter;
 
-      // Add image to photos
-      photos.appendChild(img);
+        // Add image to photos
+        photos.appendChild(img);
     }
 
     e.preventDefault();
-},false);
+}, false);
 
-photoFilter.addEventListener('change',function(e){
+photoFilter.addEventListener('change', function (e) {
 
     filter = e.target.value;
     video.style.filter = filter;
 
-},false);
+}, false);
 
-clearButton.addEventListener('click',function(e){
+clearButton.addEventListener('click', function (e) {
 
     photos.innerHTML = '';
 
@@ -88,33 +88,28 @@ clearButton.addEventListener('click',function(e){
     photoFilter.selectedIndex = 0;
 
     e.preventDefault();
-},false);
+}, false);
 
-window.addEventListener('resize',function(){
+function adjustWidthAndHeightForDevices() {
+    if (window.innerWidth < 500) {
+        width = window.innerWidth - 60;
+        document.querySelector('.top-container').style.width = width + 'px';;
 
-    if(window.innerWidth < 400){
-    width = window.innerWidth - 60;
-    document.querySelector('.top-container').style.width = width;
-
-    setWidthAndHeight();
-    }else{
+        setWidthAndHeight();
+    } else {
         width = 500;
-        document.querySelector('.top-container').style.width = width;
+        document.querySelector('.top-container').style.width = width + 'px';;
     }
+}
+
+window.addEventListener('resize', function () {
+
+    adjustWidthAndHeightForDevices();
 
 })
 
-window.addEventListener('load',function(){
-    if(window.innerWidth < 400){
-        width = window.innerWidth - 60;
-        document.querySelector('.top-container').style.width = width + 'px';
-        // document.querySelector('.btn').style.width = 80 + '%';
-
-        setWidthAndHeight();
-    }else{
-        width = 500;
-        document.querySelector('.top-container').style.width = width +'px';
-    }
+window.addEventListener('load', function () {
+    adjustWidthAndHeightForDevices();
 
 
 })

@@ -92,7 +92,7 @@ clearButton.addEventListener('click',function(e){
 
 window.addEventListener('resize',function(){
 
-    if(window.innerWidth < 400){
+    if(window.innerWidth < 500){
     width = window.innerWidth - 60;
     document.querySelector('.top-container').style.width = width;
 
@@ -105,7 +105,7 @@ window.addEventListener('resize',function(){
 })
 
 window.addEventListener('load',function(){
-    if(window.innerWidth < 400){
+    if(window.innerWidth < 500){
         width = window.innerWidth - 60;
         document.querySelector('.top-container').style.width = width + 'px';
         // document.querySelector('.btn').style.width = 80 + '%';
